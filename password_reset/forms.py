@@ -7,7 +7,8 @@ from .utils import get_user_model
 
 
 class PasswordRecoveryForm(forms.Form):
-    username_or_email = forms.CharField()
+    username_or_email = forms.CharField(
+            widget=forms.TextInput(attrs={'class':'w-100'}))
 
     def __init__(self, *args, **kwargs):
         self.case_sensitive = kwargs.pop('case_sensitive', True)
