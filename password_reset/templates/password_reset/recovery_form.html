@@ -13,12 +13,12 @@
             </div>
           </section>
           <div class="form-section">
-			<form method="post" action="{{ url }}" class="sign">
+			<form method="post" action="{{ url }}" class="sign comfy">
 				{% csrf_token %}
 				<h3 class="h-form">Username or E-mail</h3>
 				<div class="input-wrap clearfix w-100">
                 	{{ form.username_or_email.errors }}
-			        <label for="signup_email" aria-hidden="true" data-icon="✉"></label>
+			        <label for="username_or_email" aria-hidden="true" data-icon="✉"></label>
 			        {{ form.username_or_email }}
               </div>		
 				<div class="w-100">
