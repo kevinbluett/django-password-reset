@@ -16,10 +16,8 @@
 			<form method="post" action="{{ url }}" class="sign">
 				{% csrf_token %}
 				<div class="input-wrap clearfix w-100">
-					<label for="username_or_email" aria-hidden="true" data-icon="✉"></label>
                 	{{ form.as_p }}
-              </div>
-             	</div>		
+              </div>		
 				<div class="w-100">
 					<input class="btn-big btn-solid btn-accent" type="submit" value="{% trans "Recover my password" %}">
 				</div>
