@@ -17,7 +17,7 @@
 				{% csrf_token %}
 				<h3 class="h-form">Username or E-mail</h3>
 				<div class="input-wrap clearfix w-100 icon">
-                	{{ form.username_or_email.errors }}
+                	<span style="color:#fff">{{ form.username_or_email.errors }}</span>
 			        <label for="username_or_email" aria-hidden="true" data-icon="✉"></label>
 			        {{ form.username_or_email }}
               </div>		
