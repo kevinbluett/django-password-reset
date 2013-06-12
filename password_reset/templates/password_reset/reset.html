@@ -2,13 +2,46 @@
 
 {% block content %}
 	{% if invalid %}{% url "password_reset_recover" as recovery_url %}
-		<p>{% blocktrans %}Sorry, this password reset link is invalid. You can still <a href="{{ recovery_url }}">request a new one</a>.{% endblocktrans %}</p>
+	<div class="signup-content">
+        <div class="signup-module">
+          <section class="header">
+            <div class="text">
+              Password Recovery
+            </div>
+          </section>
+          <div class="form-section">
+			<h2>{% blocktrans %}Sorry, this password reset link is invalid. You can still <a href="{{ recovery_url }}">request a new one</a>.{% endblocktrans %}</h2>
+          </div>
+        </div>
+    </div>
 	{% else %}
-		<p>{% blocktrans %}Hi, <strong>{{ username }}</strong>. Please choose your new password.{% endblocktrans %}</p>
-		<form method="post" action="{% url "password_reset_reset" token %}">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<p><input type="submit" value="{% trans "Set new password" %}"></p>
-		</form>
+		<div class="signup-content">
+	        <div class="signup-module">
+	          <section class="header">
+	            <div class="text">
+	              Reset Password
+	            </div>
+	          </section>
+	          <div class="form-section">
+				<form method="post" action="{% url "password_reset_reset" token %}" class="sign comfy">
+					{% csrf_token %}
+					<h2>{% blocktrans %}Hi, <strong>{{ username }}</strong>. Please choose your new password.{% endblocktrans %}</h2>
+					<div class="input-wrap clearfix w-100 icon">
+	                	<span style="color:#fff">{{ form.password1.errors }}</span>
+				        <label for="password1" aria-hidden="true" data-icon="🔑"></label>
+				        {{ form.password1 }}
+	              	</div>		
+					<div class="input-wrap clearfix w-100 icon">
+	                	<span style="color:#fff">{{ form.password2.errors }}</span>
+				        <label for="password2" aria-hidden="true" data-icon="🔑"></label>
+				        {{ form.password2 }}
+	              	</div>		
+					<div class="w-100">
+						<input class="btn-big btn-solid btn-accent" type="submit" value="{% trans "Set new password" %}">
+					</div>
+				</form>
+	          </div>
+	        </div>
+	       </div>
 	{% endif %}
 {% endblock %}
