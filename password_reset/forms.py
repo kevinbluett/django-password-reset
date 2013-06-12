@@ -77,11 +77,11 @@ class PasswordRecoveryForm(forms.Form):
 class PasswordResetForm(forms.Form):
     password1 = forms.CharField(
         label=_('New password'),
-        widget=forms.PasswordInput,
+        widget=forms.PasswordInput(attrs={'placeholder':'New password'}),
     )
     password2 = forms.CharField(
         label=_('New password (confirm)'),
-        widget=forms.PasswordInput,
+        widget=forms.PasswordInput(attrs={'placeholder':'New password (confirm)'}),
     )
 
     def __init__(self, *args, **kwargs):
