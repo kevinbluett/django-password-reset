@@ -74,7 +74,7 @@ class PasswordRecoveryForm(forms.Form):
         try:
             user = User.objects.get(filters)
         except User.DoesNotExist:
-            raise forms.ValidationError(_("Sorry, this user doesn't exist."))
+            return get_user_by_both(username.lower())
         except User.MultipleObjectsReturned:
             raise forms.ValidationError(_("Unable to find user."))
         return user
