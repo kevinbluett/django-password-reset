@@ -1,6 +1,7 @@
 import datetime
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.sites.models import RequestSite
 from django.core import signing
 from django.core.mail import send_mail
@@ -116,7 +117,6 @@ class Reset(SaltMixin, generic.FormView):
                                salt=self.salt)
         except signing.BadSignature:
             return self.invalid()
-
         self.user = get_object_or_404(get_user_model(), pk=pk)
         return super(Reset, self).dispatch(request, *args, **kwargs)
 

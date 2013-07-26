@@ -46,7 +46,10 @@ class PasswordRecoveryForm(forms.Form):
         try:
             user = User.objects.get(**{key: username})
         except User.DoesNotExist:
-            raise forms.ValidationError(_("Sorry, this user doesn't exist."))
+            try:
+                user = User.objects.get(**{key: username.lower()})
+            except User.DoesNotExist:
+                raise forms.ValidationError(_("Sorry, this user doesn't exist."))
         return user
 
     def get_user_by_email(self, email):
@@ -56,7 +59,10 @@ class PasswordRecoveryForm(forms.Form):
         try:
             user = User.objects.get(**{key: email})
         except User.DoesNotExist:
-            raise forms.ValidationError(_("Sorry, this user doesn't exist."))
+            try:
+                user = User.objects.get(**{key: email.lower()})
+            except User.DoesNotExist:
+                raise forms.ValidationError(_("Sorry, this user doesn't exist."))
         return user
 
     def get_user_by_both(self, username):
