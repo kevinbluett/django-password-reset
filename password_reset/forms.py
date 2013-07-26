@@ -46,10 +46,7 @@ class PasswordRecoveryForm(forms.Form):
         try:
             user = User.objects.get(**{key: username})
         except User.DoesNotExist:
-            try:
-                user = User.objects.get(**{key: username.lower()})
-            except User.DoesNotExist:
-                raise forms.ValidationError(_("Sorry, this user doesn't exist."))
+            return self.get_user_by_username(username.lower())
         return user
 
     def get_user_by_email(self, email):
@@ -59,10 +56,7 @@ class PasswordRecoveryForm(forms.Form):
         try:
             user = User.objects.get(**{key: email})
         except User.DoesNotExist:
-            try:
-                user = User.objects.get(**{key: email.lower()})
-            except User.DoesNotExist:
-                raise forms.ValidationError(_("Sorry, this user doesn't exist."))
+            return self.get_user_by_email(email)
         return user
 
     def get_user_by_both(self, username):
@@ -74,7 +68,7 @@ class PasswordRecoveryForm(forms.Form):
         try:
             user = User.objects.get(filters)
         except User.DoesNotExist:
-            return get_user_by_both(username.lower())
+            return self.get_user_by_both(username.lower())
         except User.MultipleObjectsReturned:
             raise forms.ValidationError(_("Unable to find user."))
         return user
